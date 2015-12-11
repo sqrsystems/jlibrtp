@@ -145,6 +145,34 @@ public class Participant {
 		//isSender = true;
 	}
 	
+	public Participant(String networkRtpAddress, int rtpPort, String networkRtcpAddress, int rtcpPort) {
+        if(RTPSession.rtpDebugLevel > 6) {
+            System.out.println("Creating new participant: " + networkRtpAddress);
+        }
+        
+        // RTP
+        if(rtpPort > 0) {
+            try {
+                rtpAddress = new InetSocketAddress(networkRtpAddress, rtpPort);
+            } catch (Exception e) {
+                System.out.println("Couldn't resolve " + networkRtpAddress);
+            }
+            //isReceiver = true;
+        }
+        
+        // RTCP 
+        if(rtcpPort > 0) {
+            try {
+                rtcpAddress = new InetSocketAddress(networkRtcpAddress, rtcpPort);
+            } catch (Exception e) {
+                System.out.println("Couldn't resolve " + networkRtcpAddress);
+            }
+        }
+        
+        //By default this is a sender
+        //isSender = true;
+    }
+	
 	// We got a packet, but we don't know this person yet.
 	protected Participant(InetSocketAddress rtpAdr, InetSocketAddress rtcpAdr, long SSRC) {
 		rtpReceivedFromAddress = rtpAdr;

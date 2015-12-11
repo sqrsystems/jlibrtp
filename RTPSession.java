@@ -18,15 +18,17 @@
  */
 package jlibrtp;
 
-import java.net.DatagramSocket;
-import java.net.MulticastSocket;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.Iterator;
-import java.util.concurrent.locks.*;
-import java.util.Random;
+import java.net.MulticastSocket;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 /**
  * The RTPSession object is the core of jlibrtp. 
  * 
@@ -500,13 +502,13 @@ public class RTPSession {
 		this.rtcpSession.senderThrd.interrupt();
 		
 		// Give things a chance to cool down.
-		try { Thread.sleep(50); } catch (Exception e){ };
-		
+		try { Thread.sleep(50); } catch (Exception e){ }
+
 		this.appCallerThrd.interrupt();
 
 		// Give things a chance to cool down.
-		try { Thread.sleep(50); } catch (Exception e){ };
-		
+		try { Thread.sleep(50); } catch (Exception e){ }
+
 		if(this.rtcpSession != null) {		
 			// No more RTP packets, please
 			if(this.mcSession) {
@@ -523,7 +525,7 @@ public class RTPSession {
 	  * 
 	  * @return true if session and associated threads are terminating.
 	  */
-	boolean isEnding() {
+	public boolean isEnding() {
 		return this.endSession;
 	}
 
@@ -1024,7 +1026,7 @@ public class RTPSession {
 	 */
 	protected void resolveSsrcConflict() {
 		System.out.println("!!!!!!! Beginning SSRC conflict resolution !!!!!!!!!");
-		this.conflictCount++;
+		//this.conflictCount++;
 		
 		if(this.conflictCount < 5) {
 			//Don't send any more regular packets out until we have this sorted out.

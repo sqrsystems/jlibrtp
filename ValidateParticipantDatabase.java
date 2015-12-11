@@ -55,8 +55,8 @@ public class ValidateParticipantDatabase {
 
 		
 		InetAddress inetAdr = null;
-		try { inetAdr = InetAddress.getByName("127.0.0.1"); } catch (Exception e) { };
-		
+		try { inetAdr = InetAddress.getByName("127.0.0.1"); } catch (Exception e) { }
+
 		//Participant part3 = partDb.getParticipant(inetAdr);
 		//part3.ssrc = 12345678;
 		System.out.println("********************* Updating Participant 3 (4546) ***********************");

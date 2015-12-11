@@ -17,8 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package jlibrtp;
-import java.util.*;
+
 import java.net.InetSocketAddress;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Compound RTCP packet class.

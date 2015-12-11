@@ -41,7 +41,7 @@ public interface RTCPAVPFIntf {
 	 * 
 	 * @param ssrcPacketSender the SSRC of the participant reporting loss of picture
 	 */
-	public void PSFBPktPictureLossReceived(
+	void PSFBPktPictureLossReceived(
 			long ssrcPacketSender);
 	
 	/**
@@ -53,7 +53,7 @@ public interface RTCPAVPFIntf {
 	 * @param sliceNumber number of lost macroblocks, in scan order
 	 * @param slicePictureId the six least significant bits of the picture identifier 
 	 */
-	public void PSFBPktSliceLossIndic(
+	void PSFBPktSliceLossIndic(
 			long ssrcPacketSender,
 			int[] sliceFirst, int[] sliceNumber, int[] slicePictureId);
 	
@@ -66,7 +66,7 @@ public interface RTCPAVPFIntf {
 	 * @param rpsiBitString the RPSI information as natively defined by the video codec
 	 * @param rpsiPaddingBits the number of padding bits at the end of the string
 	 */
-	public void PSFBPktRefPictureSelIndic(
+	void PSFBPktRefPictureSelIndic(
 			long ssrcPacketSender,
 			int rpsiPayloadType, byte[] rpsiBitString, int rpsiPaddingBits);
 	
@@ -77,7 +77,7 @@ public interface RTCPAVPFIntf {
 	 * @param ssrcPacketSender
 	 * @param alfBitString
 	 */
-	public void PSFBPktAppLayerFBReceived(
+	void PSFBPktAppLayerFBReceived(
 			long ssrcPacketSender,
 			byte[] alfBitString);
 
@@ -90,7 +90,7 @@ public interface RTCPAVPFIntf {
 	 * @param packetID the RTP sequence number of the lost packet
 	 * @param bitmaskLostPackets the bitmask of following lost packets
 	 */
-	public void RTPFBPktReceived(
+	void RTPFBPktReceived(
 			long ssrcPacketSender,
 			int FMT, int[] packetID, int[] bitmaskLostPackets);
 }

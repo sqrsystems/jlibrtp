@@ -18,14 +18,14 @@
  */
 package jlibrtp;
 
-import java.util.Enumeration;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.util.LinkedList;
-import java.util.Hashtable;
-import java.util.ListIterator;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 /**
@@ -166,7 +166,7 @@ public class RTCPSession {
 					this.nextDelay = (int) Math.round((numerator/denominator)*randDouble);
 				}
 			} else {
-				double numerator = ((double) this.avgPktSize)*((double) rtpSession.partDb.ssrcTable.size());;
+				double numerator = ((double) this.avgPktSize)*((double) rtpSession.partDb.ssrcTable.size());
 				double denominator = bw;
 				this.nextDelay = (int) Math.round(1000.0*(numerator/denominator)) * (1000 + rand);
 			}
@@ -451,7 +451,7 @@ public class RTCPSession {
 		this.senderThrd.interrupt();
 		
 		// Give it a chance to catch up
-		try { Thread.sleep(0,1); } catch (Exception e){ };
+		try { Thread.sleep(0,1); } catch (Exception e){ }
 	}
 	
 	/**

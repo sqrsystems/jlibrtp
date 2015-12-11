@@ -37,7 +37,7 @@ public interface RTPAppIntf {
 	 * @param frame the frame containing the data
 	 * @param participant the participant from which the data came
 	 */
-	public void receiveData(DataFrame frame, Participant participant);
+	void receiveData(DataFrame frame, Participant participant);
 	
 	
 	/**
@@ -53,7 +53,7 @@ public interface RTPAppIntf {
 	 * @param type the type of event
 	 * @param participant the participants in question
 	 */
-	public void userEvent(int type, Participant[] participant);
+	void userEvent(int type, Participant[] participant);
 	
 	/**
 	 * The callback method through which the application can specify
@@ -70,5 +70,5 @@ public interface RTPAppIntf {
 	 * @param payloadType the payload type specified in the RTP packet
 	 * @return the number of packets that make up a frame
 	 */
-	public int frameSize(int payloadType);
+	int frameSize(int payloadType);
 }

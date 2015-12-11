@@ -275,12 +275,12 @@ public class RtpPkt {
 	
 	protected int setPayload(byte[] data) {
 		// TODO Padding
-		if(data.length < (1500 - 12)) {
+		if(data.length < (10240 - 12)) {
 			rawPktCurrent = false;
 			payload = data;
 			return 0;
 		} else {
-			System.out.println("RtpPkt.setPayload: Cannot carry more than 1480 bytes for now.");
+			System.out.println("RtpPkt.setPayload: Cannot carry more than 65523 bytes for now.");
 			return -1;
 		}
 	}

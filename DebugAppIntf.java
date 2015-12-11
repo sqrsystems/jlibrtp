@@ -50,7 +50,7 @@ public interface DebugAppIntf {
 	 * @param socket , taken directly from the UDP packet
 	 * @param description , see above. 
 	 */
-	public void packetReceived(int type, InetSocketAddress socket, String description);
+	void packetReceived(int type, InetSocketAddress socket, String description);
 	
 	/**
 	 * This function will notify you of any packets sent from this instance of RTPSession.
@@ -70,7 +70,7 @@ public interface DebugAppIntf {
 	 * @param socket , taken directly from the UDP packet
 	 * @param description , see above
 	 */
-	public void packetSent(int type, InetSocketAddress socket, String description);
+	void packetSent(int type, InetSocketAddress socket, String description);
 	
 	/**
 	 * Other important events that can occur in session
@@ -79,5 +79,5 @@ public interface DebugAppIntf {
 	 * @param type see above
 	 * @param description , see above
 	 */
-	public void importantEvent(int type, String description);
+	void importantEvent(int type, String description);
 }

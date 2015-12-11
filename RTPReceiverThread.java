@@ -62,7 +62,7 @@ public class RTPReceiverThread extends Thread {
 			}
 
 			// Prepare a packet
-			byte[] rawPkt = new byte[1500];
+			byte[] rawPkt = new byte[10240];
 			DatagramPacket packet = new DatagramPacket(rawPkt, rawPkt.length);
 			// Wait for it to arrive
 			if(! rtpSession.mcSession) {

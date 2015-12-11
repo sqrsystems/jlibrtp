@@ -30,6 +30,9 @@ package jlibrtp;
  * Next means new to old (from recently received to previously received) 
  * 
  * @author Arne Kepp
+ * 
+ * @warning Modified by Roderick Hodgson for SQR Systems due to bug in 
+ * low-latency networks as seen here: http://sourceforge.net/p/jlibrtp/bugs/1/
  */
 public class PktBuffer {
 	/** The RTPSession holds information common to all packetBuffers, such as max size */
@@ -209,11 +212,18 @@ public class PktBuffer {
 
 				//Need to do some real work, find out where it belongs (linear search from the back).
 				PktBufNode tmpNode = newest;
-				while(tmpNode.timeStamp > newNode.timeStamp) {
+				while(tmpNode != null && tmpNode.timeStamp > newNode.timeStamp) {
 					tmpNode = tmpNode.nextFrameQueueNode;
 				}
 				
-				if( tmpNode.timeStamp == newNode.timeStamp
+				if (tmpNode == null) {
+					if (oldest != null) {
+						oldest.nextFrameNode = newNode;
+					}
+					newNode.prevFrameQueueNode = oldest;
+					oldest = newNode;
+				} 
+				else if( tmpNode.timeStamp == newNode.timeStamp
 						&& rtpSession.frameReconstruction
 						&& newNode.seqNum != tmpNode.seqNum) {
 					//Packet has same timestamp, presumably belongs to frame. Need to order within frame.
@@ -411,11 +421,12 @@ public class PktBuffer {
 			newest = null;
 			oldest = null;
 		} else {
-			//There are more frames
+		    //There are more frames
 			oldest = oldest.prevFrameQueueNode;
-			oldest.nextFrameQueueNode = null;
+	         if (oldest != null) {
+			    oldest.nextFrameQueueNode = null;
+			}
 		}
-
 		// Update counters
 		length--;
 		

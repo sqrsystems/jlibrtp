@@ -20,7 +20,8 @@ package jlibrtp;
 
 import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 /**
  * This thread sends scheduled RTCP packets 
@@ -400,6 +401,12 @@ public class RTCPSenderThread extends Thread {
 			//Grab the next person
 			Participant part = null;
 
+			if(rtpSession.mcSession) {
+                enu = rtpSession.partDb.getParticipants();
+            } else {
+                iter = rtpSession.partDb.getUnicastReceivers();
+            }
+			
 			//Multicast
 			if(this.rtpSession.mcSession) {
 				if(! enu.hasMoreElements())

@@ -18,8 +18,10 @@
  */
 package jlibrtp;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The participant database maintains three hashtables with participants.
@@ -118,9 +120,11 @@ public class ParticipantDatabase {
 			Enumeration<Participant> enu = this.ssrcTable.elements();
 			while(notDone && enu.hasMoreElements()) {
 				Participant part = enu.nextElement();
-				if(part.unexpected && 
-						(part.rtcpReceivedFromAddress.equals(part.rtcpAddress.getAddress()) 
-						|| part.rtpReceivedFromAddress.equals(part.rtpAddress.getAddress()))) {
+                if (part.unexpected &&
+                        ((part.rtcpReceivedFromAddress != null && p.rtcpAddress != null &&
+                                part.rtcpReceivedFromAddress.getAddress().equals(p.rtcpAddress.getAddress())) ||
+                        (part.rtpReceivedFromAddress != null && p.rtpAddress != null &&
+                                part.rtpReceivedFromAddress.getAddress().equals(p.rtpAddress.getAddress())))) {
 					
 					part.rtpAddress = p.rtpAddress;
 					part.rtcpAddress = p.rtcpAddress;

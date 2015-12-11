@@ -57,11 +57,11 @@ public interface RTCPAppIntf {
 	 * @param lastSRTimeStamp (RR) RTP timestamp when last SR was received 
 	 * @param delayLastSR (RR) Delay, in RTP, since last SR was received
 	 */
-	public void SRPktReceived(long ssrc, long ntpHighOrder, long ntpLowOrder, 
-			long rtpTimestamp, long packetCount, long octetCount,
-			// Get the receiver reports, if any
-			long[] reporteeSsrc, int[] lossFraction, int[] cumulPacketsLost, long[] extHighSeq, 
-			long[] interArrivalJitter, long[] lastSRTimeStamp, long[] delayLastSR);
+	void SRPktReceived(long ssrc, long ntpHighOrder, long ntpLowOrder,
+					   long rtpTimestamp, long packetCount, long octetCount,
+					   // Get the receiver reports, if any
+					   long[] reporteeSsrc, int[] lossFraction, int[] cumulPacketsLost, long[] extHighSeq,
+					   long[] interArrivalJitter, long[] lastSRTimeStamp, long[] delayLastSR);
 	
 	/**
 	 * This function is called whenever a Receiver Report (SR) packet is received
@@ -80,9 +80,9 @@ public interface RTCPAppIntf {
 	 * @param lastSRTimeStamp (RR) RTP timestamp when last SR was received 
 	 * @param delayLastSR (RR) Delay, in RTP, since last SR was received
 	 */
-	public void RRPktReceived(long reporterSsrc, long[] reporteeSsrc, 
-			int[] lossFraction, int[] cumulPacketsLost, long[] extHighSeq, 
-			long[] interArrivalJitter, long[] lastSRTimeStamp, long[] delayLastSR);
+	void RRPktReceived(long reporterSsrc, long[] reporteeSsrc,
+					   int[] lossFraction, int[] cumulPacketsLost, long[] extHighSeq,
+					   long[] interArrivalJitter, long[] lastSRTimeStamp, long[] delayLastSR);
 	
 	/**
 	 * This function is called whenever a Source Description (SDES) packet is received.
@@ -91,7 +91,7 @@ public interface RTCPAppIntf {
 	 * 
 	 * @param relevantParticipants participants mentioned in the SDES packet
 	 */
-	public void SDESPktReceived(Participant[] relevantParticipants);
+	void SDESPktReceived(Participant[] relevantParticipants);
 	
 	/**
 	 * This function is called whenever a Bye (BYE) packet is received.
@@ -103,7 +103,7 @@ public interface RTCPAppIntf {
 	 * @param relevantParticipants participants whose SSRC was in the packet
 	 * @param reason the reason provided in the packet
 	 */
-	public void BYEPktReceived(Participant[] relevantParticipants, String reason);
+	void BYEPktReceived(Participant[] relevantParticipants, String reason);
 	
 	
 	/**
@@ -114,5 +114,5 @@ public interface RTCPAppIntf {
 	 * @param name ASCII description of packet
 	 * @param data in the packet
 	 */
-	public void APPPktReceived(Participant part, int subtype, byte[] name, byte[] data);
+	void APPPktReceived(Participant part, int subtype, byte[] name, byte[] data);
 }
